@@ -10,6 +10,8 @@ if 'BPM_SECRET_KEY' not in os.environ:
     raise ValueError('BPM_SECRET_KEY not set')
 if 'BPM_DATA_PATH' not in os.environ:
     raise ValueError('BPM_DATA_PATH not set')
+if 'BPM_HOST' not in os.environ:
+    raise ValueError('BPM_HOST not set')
 
 secret = os.environ['BPM_SECRET_KEY']
 persist_path = os.environ['BPM_DATA_PATH']
@@ -46,4 +48,4 @@ def dump():
     return json.dumps(data)
 
 if __name__ == '__main__':
-    run(host='localhost', port=8080)
+    run(host=os.environ['BPM_HOST'], port=int(os.environ.get('BPM_PORT', '8080')))
